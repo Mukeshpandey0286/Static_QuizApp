@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+    <div class="container">
+<div id="box">
+    <h2 id="quesbox"> 1) This is a question?</h2>
+    <div class="row">
+        <input class="options" id="option 1" type="radio" value="A" name="option"/>
+        <label for="option 1">
+A) option 1
+        </label>
+        </div>
+        <div class="row">
+        <input class="options" id="option 2" type="radio" value="A" name="option"/>
+        <label for="option 2">
+B) option 2
+        </label>
+    </div>
+    <div class="row">
+        <input class="options" id="option 3" type="radio" value="A" name="option"/>
+        <label for="option 3">
+C) option 3
+        </label>
+    </div>
+        <div class="row">
+        <input class="options" id="option 4" type="radio" value="A" name="option"/>
+        <label for="option 4">
+D) option 4
+        </label>
+    </div>
+    <button class="btn" onclick="submit()">
+        Submit
+    </button>
+</div>
+    </div>
+
+<script>
+    const question = [{
+        'ques': 'Who is the father of C language?',
+'a': 'Steve Jobs',
+'b': 'James Gosling',
+'c': 'Dennis Ritchie',
+'d': 'Rasmus Lerdorf',
+'currect': 'c'
+    },
+    {
+        'ques': 'Which of the following is not a valid C variable name?',
+'a': 'int number',
+'b': 'float rate',
+'c': 'int variable_count',
+'d': 'int $main',
+'currect': 'd'
+    },
+    {
+    'ques':  'All keywords in C are in ____________',
+'a': 'LowerCase letters',
+'b': 'UpperCase letters',
+'c': 'CamelCase letters',
+'d': 'None of the mentioned',
+'currect': 'a'
+    },
+    {
+    'ques':  'Which is valid C expression?',
+'a': 'int my_num = 100,000',
+'b': 'int my_num = 100000',
+'c':'int my num = 1000',
+'d': 'int $my_num = 10000',
+'currect': 'b'
+    },
+    {
+    'ques':   '_______ refers to the process of locating and removing the errors in a program?',
+'a': 'Analyzing',
+'b': 'Correcting',
+'c': 'Debugging',
+'d': 'Executing',
+'currect': 'd'
+    },
+    {
+        'ques': 'Who are known as the father of js and python?',
+        'a': 'Elon musk & dennial rich',
+        'b': 'nitin kumar',
+        'c': 'Brendan Eich & Guido van Rossum',
+        'd': 'Guido van Rossum & Rasmus Lerdorf',
+        'currect': 'c'
+    }
+
+]
+let index = 0;
+let total = question.length;
+let right = 0, 
+wrong = 0;
+const quesbox = document.getElementById("quesbox");
+const options = document.querySelectorAll(".options");
+const loadQuestion =() =>{
+if( index === total){
+    return endquiz();
+}
+reset();
+    
+const  data = question[index]
+console.log(data)
+quesbox.innerText = `${index+1} ${data.ques}`;
+options[0].nextElementSibling.innerText = data.a;
+options[1].nextElementSibling.innerText = data.b;
+options[2].nextElementSibling.innerText = data.c;
+options[3].nextElementSibling.innerText = data.d;
+}   
+const submit = () =>{
+    const data = question[index];
+    const ans = getanswer() 
+    if(ans === data.correct){
+right ++;
+    }else{
+wrong++;
+    }
+    index++;
+    loadQuestion();
+    return;
+}
+const getanswer =() =>{
+    let sol;
+    options.forEach(
+        (input)=>{
+
+        if(input.checked){
+            sol = input.value;
+        }
+    }
+    )
+    return sol;
+    }
+const reset = () =>{
+    options.forEach(
+        (input) =>{
+            if(input.checked = false);
+        }
+    )
+}
+
+const endquiz = () =>{
+    document.getElementById("box").innerHTML = `
+    <div style = " color: blue;"
+<h3>Thankyou for playing my quiz..!! </h3>
+<h2 style = "font-weight: bold;"> ${right} / ${total} are the right answer </h2>  
+</div>
+`
+}
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
